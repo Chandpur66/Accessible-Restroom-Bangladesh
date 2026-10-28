@@ -1,0 +1,9 @@
+{
+  "name": "Accessible Restroom in Bangladesh",
+  "short_name": "Accessible Toilet",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f8f8",
+  "theme_color": "#075e63",
+  "description": "বাংলাদেশের পাবলিক ও হুইলচেয়ার-অ্যাক্সেসিবল টয়লেট লিস্ট"
+}

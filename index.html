@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#075e63">
+<meta name="description" content="বাংলাদেশের হুইলচেয়ার-অ্যাক্সেসিবল ও পাবলিক টয়লেট খুঁজুন">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>Accessible Restroom in Bangladesh</title>
+<style>
+:root{--bg:#f4f8f8;--card:#fff;--ink:#172b2d;--muted:#637779;--brand:#087b80;--line:#dce8e8;--soft:#e2f5f3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+header{background:linear-gradient(135deg,#075e63,#10969a);color:#fff;padding:24px 18px 22px;border-radius:0 0 24px 24px}
+.brandrow{display:flex;align-items:center;gap:12px}.logo{width:50px;height:50px;background:#fff;color:#087b80;border-radius:15px;display:grid;place-items:center;font-size:28px;font-weight:800}
+h1{font-size:21px;line-height:1.25;margin:0}header p{margin:10px 0 0;color:#d8f5f2;font-size:13px}
+main{max-width:760px;margin:auto;padding:16px}
+.search{display:flex;gap:8px;margin:0 0 12px}.search input{width:100%;border:1px solid var(--line);border-radius:13px;padding:13px 14px;font-size:16px;background:white;outline-color:var(--brand)}
+.filters{display:flex;gap:8px;overflow:auto;padding-bottom:10px}.filter{border:1px solid var(--line);border-radius:99px;background:#fff;padding:9px 13px;white-space:nowrap;color:var(--ink);font-size:13px}.filter.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.stats{font-size:12px;color:var(--muted);margin:6px 2px 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;margin:0 0 12px;box-shadow:0 3px 14px #103c3c08}
+.cardtop{display:flex;align-items:flex-start;gap:10px}.symbol{width:42px;height:42px;border-radius:13px;background:var(--soft);display:grid;place-items:center;font-size:21px;flex-shrink:0}
+.info{flex:1;min-width:0}.name{font-size:16px;font-weight:750;line-height:1.35}.meta{font-size:12px;color:var(--muted);margin-top:5px}.tag{display:inline-block;margin-top:7px;background:#e6f6ec;color:#176b3a;border-radius:7px;padding:4px 7px;font-size:11px}
+.desc{font-size:13px;color:#455c5e;line-height:1.7;margin:11px 0 0;white-space:pre-line}
+.actions{display:flex;gap:8px;margin-top:13px}.btn{border:0;border-radius:11px;padding:10px 12px;font-weight:650;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}.primary{background:var(--brand);color:white;flex:1}.secondary{background:#edf4f4;color:#285255}.done{background:#d9f4e4;color:#176b3a}
+.empty{text-align:center;padding:35px 12px;color:var(--muted)}footer{text-align:center;padding:18px;color:var(--muted);font-size:11px;line-height:1.7}
+.installhint{background:#fff8df;border:1px solid #f0df9c;color:#695516;border-radius:13px;padding:12px;font-size:12px;line-height:1.6;margin-bottom:14px}
+</style>
+</head>
+<body>
+<header>
+ <div class="brandrow"><div class="logo">♿</div><div><h1>Accessible Restroom<br>in Bangladesh 🇧🇩</h1><div style="font-size:12px;margin-top:5px;color:#e0fffc">পাবলিক টয়লেট ও হুইলচেয়ার অ্যাক্সেস</div></div></div>
+ <p>স্থান খুঁজুন · Google Maps-এ পথ দেখুন · দেখা হয়েছে চিহ্নিত করুন</p>
+</header>
+<main>
+ <div class="installhint">📱 হোম স্ক্রিনে রাখতে: এই অ্যাপটি অনলাইনে প্রকাশ করার পর Chrome-এর ⋮ মেনু থেকে <b>Add to Home screen</b> চাপুন।</div>
+ <div class="search"><input id="q" type="search" placeholder="টয়লেট বা এলাকার নাম লিখুন…" aria-label="Search places"></div>
+ <div class="filters">
+  <button class="filter active" data-filter="all">সব স্থান</button>
+  <button class="filter" data-filter="access">♿ অ্যাক্সেসিবল</button>
+  <button class="filter" data-filter="done">✓ দেখা হয়েছে</button>
+  <button class="filter" data-filter="todo">এখনও যাইনি</button>
+ </div>
+ <div class="stats" id="stats"></div>
+ <section id="list"></section>
+ <footer>তথ্য আপনার Google Maps লিস্টের স্ক্রিনশট থেকে নেওয়া প্রাথমিক তালিকা। যাওয়ার আগে Maps-এ খোলা/বন্ধের সময় ও অ্যাক্সেস সুবিধা যাচাই করুন।</footer>
+</main>
+<script>
+const mapsList='https://maps.app.goo.gl/RtT483iW9it5fN6B6?g_st=ac';
+const places=[
+ {name:'Public Toilet',area:'স্ক্রিনশটে দেখানো স্থান',type:'Public bathroom',distance:'850 m',rating:'2.5 ★ (4)',access:false,desc:'আপনার Google Maps লিস্টে থাকা পাবলিক টয়লেট। যাওয়ার আগে সুবিধা যাচাই করুন।'},
+ {name:'Gulshan-2 Public Toilet',area:'গুলশান-২, ঢাকা',type:'Public bathroom',distance:'1.1 km',rating:'4.2 ★ (94)',access:true,desc:'স্ক্রিনশটের বর্ণনা অনুযায়ী নারী ও পুরুষের জন্য আলাদা টয়লেট, হুইলচেয়ার-অ্যাক্সেসিবল টয়লেট, সুপেয় পানি ও হাত ধোয়ার ব্যবস্থা রয়েছে। তথ্য পুরোনো হতে পারে।'},
+ {name:'Public Toilet Dr. Fazle Rabbi Park',area:'ডা. ফজলে রাব্বি পার্ক',type:'Public wheelchair-accessible bathroom',distance:'1.9 km',rating:'রেটিং নেই',access:true,desc:'Google Maps লিস্টে হুইলচেয়ার-অ্যাক্সেসিবল পাবলিক টয়লেট হিসেবে রয়েছে।'},
+ {name:'Patient Visitor Toilet',area:'ঢাকা (সঠিক স্থান Maps-এ দেখুন)',type:'Public wheelchair-accessible bathroom',distance:'2.9 km',rating:'4.0 ★ (1)',access:true,desc:'Google Maps লিস্টে হুইলচেয়ার-অ্যাক্সেসিবল টয়লেট হিসেবে রয়েছে।'},
+ {name:'Mohakhali Public Toilet',area:'মহাখালী, ঢাকা',type:'Public bathroom',distance:'3.0 km',rating:'3.0 ★ (45)',access:false,desc:'স্ক্রিনশটের নোট: ফ্লাইওভারের নিচে। পানির স্যানিটেশন ভালো নয় বলে উল্লেখ আছে। পানির নিরাপত্তা নিজে যাচাই করুন।'},
+ {name:'Bijay Sarani Public Toilet-1',area:'বিজয় সরণি, ঢাকা',type:'Wheelchair-accessible public toilet',distance:'4.8 km',rating:'রেটিং দেখা যায়নি',access:true,desc:'লিস্টের নোট অনুযায়ী হুইলচেয়ার-অ্যাক্সেসিবল।'},
+ {name:'Bijay Sarani Public Toilet-2',area:'বিজয় সরণি, ঢাকা',type:'Public toilet',distance:'4.9 km',rating:'রেটিং দেখা যায়নি',access:false,desc:'সম্পূর্ণ তথ্য স্ক্রিনশটে দেখা যায়নি। বিস্তারিত জানতে Google Maps খুলুন।'},
+ {name:'Public Toilet',area:'ঢাকা (সঠিক স্থান Maps-এ দেখুন)',type:'Public bathroom',distance:'5.1 km',rating:'4.0 ★ (24)',access:false,desc:'স্ক্রিনশটে টয়লেটের ছবি আছে। সঠিক নাম/ঠিকানা Google Maps-এ যাচাই করুন।'},
+ {name:'Panthakunja Toilet',area:'পান্থকুঞ্জ, ঢাকা',type:'Public bathroom',distance:'5.6 km',rating:'4.1 ★ (43)',access:true,desc:'স্ক্রিনশটের বর্ণনা অনুযায়ী ফুটপাতে অবস্থিত; নারী-পুরুষের ব্যবস্থা, হুইলচেয়ার প্রবেশ, গোসলখানা, খাবার পানি ও লকারের সুবিধার উল্লেখ আছে। যাওয়ার আগে যাচাই করুন.'}
+];
+let filter='all';const done=new Set(JSON.parse(localStorage.getItem('restroomDone')||'[]'));
+const list=document.getElementById('list'),q=document.getElementById('q'),stats=document.getElementById('stats');
+function render(){
+ const query=q.value.trim().toLowerCase();
+ const found=places.filter((p,i)=>{
+  const match=(p.name+' '+p.area+' '+p.type+' '+p.desc).toLowerCase().includes(query);
+  return match&&(filter==='all'||(filter==='access'&&p.access)||(filter==='done'&&done.has(i))||(filter==='todo'&&!done.has(i)));
+ });
+ stats.textContent=`স্ক্রিনশট থেকে যোগ করা ${places.length}টি স্থান · ${done.size}টি দেখা হয়েছে`;
+ list.innerHTML='';
+ if(!found.length){list.innerHTML='<div class="empty">কোনো স্থান পাওয়া যায়নি। অন্য নাম দিয়ে খুঁজুন।</div>';return}
+ found.forEach(p=>{
+  const i=places.indexOf(p),card=document.createElement('article');card.className='card';
+  const searchUrl='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.name+' '+p.area+' Dhaka Bangladesh');
+  card.innerHTML=`<div class="cardtop"><div class="symbol">${p.access?'♿':'🚻'}</div><div class="info"><div class="name"></div><div class="meta"></div>${p.access?'<span class="tag">♿ অ্যাক্সেসিবল হিসেবে তালিকাভুক্ত</span>':''}</div></div><div class="desc"></div><div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="${searchUrl}">📍 Maps-এ খুলুন</a><button class="btn ${done.has(i)?'done':'secondary'}">${done.has(i)?'✓ দেখা হয়েছে':'○ দেখা হয়েছে চিহ্নিত'}</button></div>`;
+  card.querySelector('.name').textContent=p.name;card.querySelector('.meta').textContent=`${p.type} · ${p.distance} · ${p.rating}`;card.querySelector('.desc').textContent=p.desc;
+  card.querySelector('button').onclick=()=>{done.has(i)?done.delete(i):done.add(i);localStorage.setItem('restroomDone',JSON.stringify([...done]));render()};
+  list.appendChild(card);
+ });
+}
+q.addEventListener('input',render);
+document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render()});
+render();
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{})); }
+</script>
+</body></html>
